@@ -6,4 +6,4 @@
 
 $Logtime = (get-date -f s).replace(":","").replace("-","");
 #winget upgrade --all --log "C:\repos\GTAutomation\logs\$Logtime.log"
-winget upgrade --all | out-file "C:\repos\GTAutomation\logs\$Logtime.log"
+winget upgrade --all --disable-interactivity | out-file "C:\repos\GTAutomation\logs\$Logtime.log"
