@@ -2,8 +2,13 @@
 #Author: Stephen Gillie
 #Created on: 3/18/2023
 #Updated on: 3/18/2023
-#Notes: http://asaconsultant.blogspot.com/2014/05/toying-with-audio-in-powershell.html
+#Notes:  Must be run as admin the first time:
+if (![System.Diagnostics.EventLog]::SourceExists("GTAutomation")){
+	[System.Diagnostics.EventLog]::CreateEventSource("GTAutomation","Application")
+}
 
+
+#http://asaconsultant.blogspot.com/2014/05/toying-with-audio-in-powershell.html
 Add-Type -TypeDefinition @'
 
 using System.Runtime.InteropServices;
@@ -50,3 +55,14 @@ public class Audio {
 
 '@
 
+Function Add-Log {
+	param(
+		[string]$data,
+		[int]$eventId
+	)
+	if ($eventId) {
+		[System.Diagnostics.EventLog]::WriteEntry("GTAutomation",$data,4,$eventId)
+	} else {
+		[System.Diagnostics.EventLog]::WriteEntry("GTAutomation",$data,4)
+	}
+}
