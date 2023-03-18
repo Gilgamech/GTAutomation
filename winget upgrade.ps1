@@ -4,6 +4,7 @@
 #Updated on: 3/18/2023
 #Notes: 
 
-$Logtime = (get-date -f s).replace(":","").replace("-","");
+Import-Module C:\repos\GTAutomation\Add-AudioType.ps1 -Force
 #winget upgrade --all --log "C:\repos\GTAutomation\logs\$Logtime.log"
-winget upgrade --all --disable-interactivity | out-file "C:\repos\GTAutomation\logs\$Logtime.log"
+$out = winget upgrade --all --disable-interactivity 
+Add-Log "winget upgrade: `n$out"
